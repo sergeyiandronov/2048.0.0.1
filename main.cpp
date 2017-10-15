@@ -42,6 +42,50 @@ bool down(int uper[4][4]){
 			n++;
 		}
 		
+#include <iostream>
+using namespace std;
+int bmp[4][4];
+bool up(int uper[4][4]){
+	bool any=true;
+	
+	for(int j=0;j<4;j++){
+		int n=0;
+		while(n<4){
+			if(uper[j][0]!=0){if(uper[j][0]==uper[j][1]){uper[j][1]+=uper[j][0];
+				uper[j][0]=0;n=3;
+			}else{any=false;break;}}
+			
+			for(int i=0;i<3;i++){
+			
+				uper[j][i]=uper[j][i+1];
+				
+			}
+			uper[j][3]=0;
+			n++;
+		}
+		
+	}
+	return any;
+}
+bool down(int uper[4][4]){
+	bool any=true;
+	
+	for(int j=0;j<4;j++){
+		int n=0;
+		while(n<4){
+			if(uper[j][3]!=0){if(uper[j][3]==uper[j][2]){uper[j][2]+=uper[j][3];
+				uper[j][3]=0;n=3;
+			}else{any=false;break;}}
+			
+			for(int i=3;i>0;i--){
+			
+				uper[j][i]=uper[j][i-1];
+				
+			}
+			uper[j][0]=0;
+			n++;
+		}
+		
 	}
 	return any;
 }
@@ -95,19 +139,35 @@ void bmpout(){
     	   if(bmp[i][j]==0){cout<<"*";continue;}cout<<bmp[i][j];
     	} cout<<"\n";
     }
-    cout<<"stop"<<"\n";
+    cout<<"\n";
 }
-int main() {bmp[1][1]=2;
+int main() {char com=' ';
+	bmp[1][1]=2;
 	bmp[1][2]=2;
 	bmp[1][3]=2;
 	bmp[2][3]=4;
 	bmp[0][3]=2;
-	bmpout();
-	up(bmp);
-	bmpout();
-	down(bmp);
-	bmpout();
-	left(bmp);
-	bmpout();
+	
+        
+	while(com!='q'){
+	
+	  switch(com){
+	  	case 'j':
+	  	down(bmp);
+	  	break;
+	  	case 'k':
+	  	up(bmp);
+	  	break;
+	  	case 'h':
+	  	left(bmp);
+	  	break;
+	  	case 'l':
+	  	right(bmp);
+	  	break;
+	  	
+	  }
+	  bmpout();
+	  	cin>>com;
+	}
 	return 0;
 }
