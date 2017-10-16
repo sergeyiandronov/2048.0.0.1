@@ -1,35 +1,55 @@
 #include <iostream>
+#include <ctime>
 using namespace std;
 int bmp[4][4];
 void initmas(int u[4]){
     for(int i=0;i<4;i++){u[i]=0;}
 }
-void init(){
-    bmp[1][0]=4;
-    bmp[1][1]=2;
-    bmp[1][2]=2;
-    bmp[1][3]=2;
-    bmp[2][3]=4;
-    bmp[0][3]=2;
-    bmp[2][2]=4;
+void initmas(int u[4][4]){
+    for(int i=0;i<4;i++){for(int j=0;j<4;j++){u[i][j]=0;}}
 }
-bool up(int uper[4][4]){
-    bool any=true;
+int ran2(int p){
+    int l=0;
+    int z=rand()%p;
+    if(z!=0){l=1;}
+    for(int i=0;i<z;i++){
+
+        l+=l;
+
+    }
+    return l;
+}
+
+
+void init(){
+    initmas(bmp);
+    srand(time(NULL));
+    bmp[1][0]=ran2(4);
+    bmp[1][1]=ran2(4);
+    bmp[1][2]=ran2(4);
+    bmp[1][3]=ran2(4);
+    bmp[2][3]=ran2(4);
+    bmp[0][3]=ran2(4);
+    bmp[2][2]=ran2(4);
+}
+void up(int uper[4][4]){
+
 
     for(int j=0;j<4;j++){int y[4];initmas(y);int n=0;
         for(int i=0;i<4;i++){if(uper[j][i]!=0){y[n]=uper[j][i];n++;}}
 
         for(int z=0;z<4;z++){if((y[z]==y[z+1])&&(y[z]!=0)){y[z]+=y[z+1];y[z+1]=0;}}
 
-      for(int w=0;w<3;w++){if(y[w]==0){y[w]=y[w+1];y[w+1]=0;}}
+        for(int w=0;w<3;w++){if(y[w]==0){y[w]=y[w+1];y[w+1]=0;}}
 
         for(int i=0;i<4;i++){uper[j][i]=y[i];};
-        }
+    }
 
-    return any;
+
 }
-bool down(int uper[4][4]){
-    bool any=true;
+
+void down(int uper[4][4]){
+
 
     for(int j=0;j<4;j++){int y[4];initmas(y);int n=3;
         for(int i=3;i>-1;i--){if(uper[j][i]!=0){y[n]=uper[j][i];n--;}}
@@ -41,10 +61,9 @@ bool down(int uper[4][4]){
         for(int i=0;i<4;i++){uper[j][i]=y[i];};
     }
 
-    return any;
+
 }
-bool left(int uper[4][4]){
-    bool any=true;
+void left(int uper[4][4]){
 
     for(int j=0;j<4;j++){int y[4];initmas(y);int n=0;
         for(int i=0;i<4;i++){if(uper[i][j]!=0){y[n]=uper[i][j];n++;}}
@@ -57,10 +76,10 @@ bool left(int uper[4][4]){
     }
 
 
-    return any;
+
 }
-bool right(int uper[4][4]){
-    bool any=true;
+void right(int uper[4][4]){
+
     for(int j=0;j<4;j++){int y[4];initmas(y);int n=3;
         for(int i=3;i>-1;i--){if(uper[i][j]!=0){y[n]=uper[i][j];n--;}}
 
@@ -72,7 +91,6 @@ bool right(int uper[4][4]){
     }
 
 
-    return any;
 }
 void bmpout(){
     for(int j=0;j<4;j++){
@@ -89,7 +107,7 @@ int main() {char com=' ';
 
         switch(com){
             case 'j':
-                down(bmp);
+               down(bmp);
                 break;
             case 'k':
                 up(bmp);
