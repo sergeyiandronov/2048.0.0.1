@@ -4,6 +4,15 @@ int bmp[4][4];
 void initmas(int u[4]){
     for(int i=0;i<4;i++){u[i]=0;}
 }
+void init(){
+    bmp[1][0]=4;
+    bmp[1][1]=2;
+    bmp[1][2]=2;
+    bmp[1][3]=2;
+    bmp[2][3]=4;
+    bmp[0][3]=2;
+    bmp[2][2]=4;
+}
 bool up(int uper[4][4]){
     bool any=true;
 
@@ -73,14 +82,8 @@ void bmpout(){
     }
     cout<<"\n";
 }
-int main() {char com=' ';bmp[1][0]=2;
-    bmp[1][1]=2;
-    bmp[1][2]=2;
-    bmp[1][3]=2;
-    bmp[2][3]=4;
-    bmp[0][3]=2;
-    bmp[2][2]=4;
-
+int main() {char com=' ';
+    init();
 
     while(com!='q'){
 
